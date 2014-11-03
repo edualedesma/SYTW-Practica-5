@@ -1,0 +1,80 @@
+!!!
+%html{:lang => "en"}
+  %head
+    %meta{:charset => "utf-8"}
+    %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}
+    %meta{:content => "", :name => "description"}
+    %meta{:content => "", :name => "author"}
+    %link{:href => "", :rel => "icon"}
+    %title Acortador de URLs
+    / Bootstrap core CSS
+    %link{:href => "./css/bootstrap.min.css", :rel => "stylesheet"}
+    / Custom styles for this template
+    %link{:href => "./css/carousel.css", :rel => "stylesheet"}
+  
+  /NAVBAR
+  /==================================================
+  %body
+    .navbar-wrapper
+      .container
+        .navbar.navbar-inverse.navbar-static-top{:role => "navigation"}
+          .container
+            .navbar-header
+              %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", :type => "button"}
+                %span.sr-only Toggle navigation
+                %span.icon-bar
+                %span.icon-bar
+                %span.icon-bar
+              %a.navbar-brand{:href => "/"} Acortador URLs
+            .navbar-collapse.collapse
+              %ul.nav.navbar-nav
+                %li
+                  - if (session[:email].to_s == '')
+                    %a{:href => '/auth/google_oauth2'} Identifícate
+                  - else
+                    %a{:href => ''} Identificado como: #{session['name']}
+                    %li
+                      %a{:href => '/logout/salir'} Salir
+    
+    /Carousel
+    /==================================================
+    #myCarousel.carousel.slide
+      / Indicators
+      .carousel-inner
+        .item.active
+          .container
+            .carousel-caption
+              %h1 Acortador de URLs
+              %form.form-inline{:action=>"/", :method=>"POST", :role=>"form"}
+                .form-group
+                  %label(for="url")
+                  %input.form-control.input-lg{:type=>"text", :name=>"url", :id=>"myurl", :size=>60, :autofocus=>true, :accesskey=>"s", :placeholder=>"Introduzca url"}
+                  %input.form-control.input-lg{:type=>"text", :name=>"myurlshort", :id=>"myurlshort", :size=>30, :placeholder=>"a /"}
+                  %button.btn.btn-lg.btn-success{:type=>"submit"}Acortar
+
+    .container.marketing
+      .row
+        %center
+          =yield
+
+      / FOOTER
+      %center
+        %footer 
+          %p
+            &copy Design by 
+            %a{:href=>"https://github.com/alu3286"}Eduardo Acuña
+            & 
+            %a{:href=>"https://github.com/alu0100696615"}Sergio Díaz
+          /%a{:href => "#"} Privacy
+          /\&middot;
+          /%a{:href => "#"} Terms
+    / /.container
+    
+    /Bootstrap core JavaScript
+    /==================================================
+    / Placed at the end of the document so the pages load faster
+    %script{:src => "https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"}
+    %script{:src => "./js/bootstrap.min.js"}
+
+    

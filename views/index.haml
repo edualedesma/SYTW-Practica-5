@@ -1,0 +1,19 @@
+- @contador=1
+%table.table.table-striped
+  %tr
+    %td #
+    %td URL
+    %td Acceso
+  - @list.each do |url|
+    %tr
+      %td
+        #{@contador}
+        - @contador = @contador + 1
+      %td
+        #{url.url}
+      - if (url.myurl == '')
+        %td
+          %a{:href=>"/#{url.id.to_s(Base)}"} (#{url.id.to_s(Base)})
+      - else
+        %td
+          %a{:href=>"/#{url.myurl}"} (#{url.myurl})
