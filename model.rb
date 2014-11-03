@@ -1,4 +1,4 @@
-class ShortenedUrl
+mclass ShortenedUrl
   include DataMapper::Resource
 
   property :id, Serial
@@ -22,7 +22,10 @@ class Visit
   after :create, :set_country
 
   def set_country
-
+    xml = RestClient.get "http://ip-api.com/xml/#{self.ip}"  
+    pais = XmlSimple.xml_in(xml.to_s, { 'ForceArray' => false })['country'].to_s
+    self.country = pais
+    self.save
   end
 
                                    
