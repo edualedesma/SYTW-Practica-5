@@ -68,11 +68,13 @@ end
 get '/:shortened' do
   puts "inside get '/:shortened': #{params}"
 
-  if (params[:myurlshort] == '' || params[:myurlshort].nil?)
+  if (params[:shortened] == '' || params[:shortened].nil?)
     short_url = ShortenedUrl.first(:id => params[:shortened].to_i(Base))
   else
     short_url = ShortenedUrl.first(:myurl => params[:shortened])
   end
+
+
 
   # HTTP status codes that start with 3 (such as 301, 302) tell the
   # browser to go look for that resource in another location. This is
