@@ -9,7 +9,7 @@ class ShortenedUrl
   property :myurl, String
   property :username, Text
   
-  has n, :visits
+  has n, :visit
 end
 
 
@@ -27,8 +27,9 @@ class Visit
   def set_country
     xml = RestClient.get "http://ip-api.com/xml/#{self.ip}"  
     pais = XmlSimple.xml_in(xml.to_s, { 'ForceArray' => false })['country'].to_s
-    if !pais 
+    if (!pais) 
       pais = "No encontrada"
+    end
     self.country = pais
     self.save
   end
