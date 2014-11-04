@@ -12,7 +12,6 @@ class ShortenedUrl
   has n, :visit
 end
 
-
 class Visit
   include DataMapper::Resource
 
