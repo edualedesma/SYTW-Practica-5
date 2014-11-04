@@ -74,7 +74,8 @@ get '/:shortened' do
     short_url = ShortenedUrl.first(:myurl => params[:shortened])
   end
 
-
+  short_url.visit << Visit.create(:ip => set_ip, :shortened_url_id => short_url.id)
+  short_url.save
 
   # HTTP status codes that start with 3 (such as 301, 302) tell the
   # browser to go look for that resource in another location. This is

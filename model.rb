@@ -19,7 +19,8 @@ class Visit
   property  :created_at,  DateTime
   property  :ip,          IPAddress
   property  :country,     String
-  belongs_to  :link
+  
+  belongs_to  :ShortenedUrl
 
   after :create, :set_country
 
