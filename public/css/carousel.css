@@ -12,12 +12,14 @@ footer {
   font-size: 0.9em;
 }
 
-/* CUSTOMIZE THE NAVBAR
--------------------------------------------------- */
 .estadisticastitular {
   width:1000px;
   margin:auto;
+  margin-top: 0.5em;
 }
+
+/* CUSTOMIZE THE NAVBAR
+-------------------------------------------------- */
 /* Special class on .container surrounding .navbar, used for positioning it into place. */
 .navbar-wrapper {
   position: absolute;
