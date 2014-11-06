@@ -4,6 +4,7 @@
     %td #
     %td URL
     %td Acceso
+    %td Visitas
   - @list.each do |url|
     %tr
       %td
@@ -17,3 +18,6 @@
       - else
         %td
           %a{:href=>"/#{url.myurl}"} (#{url.myurl})
+      %td
+        - visitas = Visit.all(:shortenedurl_id => url.id)
+        %a{:href=>""} #{visitas.count}

@@ -13,6 +13,7 @@ gem 'erubis'
 #Gemas estadistica
 gem 'rest-client'
 gem 'xml-simple'
+gem 'chartkick'
 
 
 group :development, :test do
