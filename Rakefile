@@ -40,3 +40,8 @@ desc "Ejecutar las pruebas unitarias"
 task :test do
   sh "ruby ./test/test.rb"
 end
+
+desc "Ejecutar las pruebas unitarias de estadisticas"
+task :test_estadisticas do
+  sh "ruby ./test/test_estadisticas.rb"
+end
