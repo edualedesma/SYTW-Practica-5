@@ -25,6 +25,17 @@ describe 'Tests de clase visita' do
   
   end
      
+  it "Debe coincidir id de con el que está en la tabla visita" do
+    assert '1', @Objeto.id
+  end  
+
+  it "Debe coincidir ip de con el que está en la tabla visita" do
+    assert @ip, @Objeto.ip
+  end  
+
+  it "Debe devolver que no coincide el id" do
+    assert_not_same(@id, @Objeto.id)
+  end
 
 end
 
