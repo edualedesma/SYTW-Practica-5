@@ -23,6 +23,8 @@ También puedes ver la aplicación en Heroku pinchando [aquí](http://acortador-
 ###Comprobación de los tests
 Para comprobar los test ejecutar en terminal `rake tests`.
 
+Para comprobar test de los gráficos de estadísticas `rake test_estadisticas`.
+
 
 # A URL shortener
 
