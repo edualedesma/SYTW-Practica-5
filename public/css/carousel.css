@@ -18,6 +18,10 @@ footer {
   margin-top: 0.5em;
 }
 
+.iconos{
+  margin-top: 2%;
+}
+
 /* CUSTOMIZE THE NAVBAR
 -------------------------------------------------- */
 /* Special class on .container surrounding .navbar, used for positioning it into place. */

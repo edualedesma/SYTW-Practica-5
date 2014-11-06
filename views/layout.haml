@@ -32,7 +32,10 @@
               %ul.nav.navbar-nav
                 %li
                   - if (session[:email].to_s == '')
-                    %a{:href => '/auth/google_oauth2'} Identifícate
+                    .iconos.col-xs-12.col-sm-4.col-lg-4
+                      /%a{:href => '/auth/google_oauth2'} Identifícate
+                      %a{:href => '/auth/google_oauth2'}
+                        %img{:src => "/img/google_logo.png", :height => "50px", :width => "50px"}
                   - else
                     %a{:href => ''} Identificado como: #{session['name']}
                     %li

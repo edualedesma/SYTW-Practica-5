@@ -1,2 +1,4 @@
 .DS_Store
-
+my_shortened_urls.db
+client_secret*
+config/config_filled.yml
