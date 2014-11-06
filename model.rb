@@ -34,5 +34,8 @@ class Visit
     self.save
   end
 
+  def self.fecha_por_dias(id)
+    repository(:default).adapter.select("SELECT date(created_at) AS date, count(*) AS count FROM visits WHERE shortenedurl_id = '#{id}' GROUP BY date(created_at)")
+  end
                                    
 end

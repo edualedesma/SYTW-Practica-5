@@ -1,0 +1,40 @@
+!!!
+%html{:lang => "en"}
+  %head
+    %meta{:charset => "utf-8"}
+    %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}
+    %meta{:content => "", :name => "description"}
+    %meta{:content => "", :name => "author"}
+    %link{:href => "img/favicon.ico", :rel => "icon"}
+    %title Acortador de URLs
+    / Bootstrap core CSS
+    %link{:href => "../css/bootstrap.min.css", :rel => "stylesheet"}
+    / Custom styles for this template
+    %link{:href => "../css/carousel.css", :rel => "stylesheet"}
+    %script{:src => "https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"}
+    %script{:src => "../js/bootstrap.min.js"}
+    %script{:src => "http://www.google.com/jsapi"}
+    %script{:src => "../js/chartkick.js"}
+
+
+
+  %body
+    - web = Shortenedurl.first(:id => params[:id])
+    %h1.estadisticastitular
+      Visitas de: 
+      = web.url
+    %br 
+
+   
+    - visita = Visit.all()
+    - dias = Hash.new
+    - visita.fecha_por_dias(params[:id]).each do |item|
+      - dias[item.date] = item.count
+
+
+    = column_chart(dias)    
+
+
+
+    

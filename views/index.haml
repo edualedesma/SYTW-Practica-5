@@ -20,4 +20,4 @@
           %a{:href=>"/#{url.myurl}"} (#{url.myurl})
       %td
         - visitas = Visit.all(:shortenedurl_id => url.id)
-        %a{:href=>""} #{visitas.count}
+        %a{:href=>"/estadisticas/#{url.id}"} #{visitas.count}

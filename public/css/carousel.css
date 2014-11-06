@@ -14,7 +14,10 @@ footer {
 
 /* CUSTOMIZE THE NAVBAR
 -------------------------------------------------- */
-
+.estadisticastitular {
+  width:1000px;
+  margin:auto;
+}
 /* Special class on .container surrounding .navbar, used for positioning it into place. */
 .navbar-wrapper {
   position: absolute;

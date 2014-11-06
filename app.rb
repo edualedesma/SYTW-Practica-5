@@ -6,6 +6,8 @@ require 'haml'
 require 'uri'
 require 'pp'
 #require 'socket'
+
+require 'chartkick'
 require 'data_mapper'
 
 require './auth.rb'
@@ -45,6 +47,12 @@ get '/' do
     # in SQL => SELECT * FROM "ShortenedUrl" WHERE username = 'session[:email]' ORDER BY "id" ASC
   end
   haml :index
+end
+
+get '/estadisticas/:id' do
+  
+  haml :estadisticas, :layout => false
+
 end
 
 post '/' do
