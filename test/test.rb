@@ -3,6 +3,7 @@ require 'minitest/autorun'
 require 'rack/test'
 require 'test/unit'
 require_relative '../app.rb'
+require_relative '../model.rb'
 
 include Test::Unit::Assertions
 
@@ -13,6 +14,22 @@ def app
   Sinatra::Application
 end
 
+
+
+describe 'Tests de clase visita' do
+  before :all do
+    
+    @id = '2'
+    @ip = "127.0.0.1"
+    @Objeto = Visit.new(:id => "1", :ip => "127.0.0.1")
+  
+  end
+     
+
+end
+
+
+
 describe 'Tests de app.rb' do
   before :all do
     @Pagina = "http://www.diariodeavisos.com"
@@ -20,10 +37,8 @@ describe 'Tests de app.rb' do
     @ShortPagina = "periodidco"
     @Objeto = Shortenedurl.first_or_create(:url => "http://www.diariodeavisos.com", :myurl =>'periodico', :username => 'Edu')
     @ObjetoDist = Shortenedurl.first(:username=> 'Juan')
-  
-  end
-     
-     
+
+   end   
          
   it "Debe devolver diario de avisos está en la base de datos" do
     assert @Pagina, @Objeto.url 
