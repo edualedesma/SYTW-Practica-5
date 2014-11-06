@@ -1,7 +1,7 @@
 require 'restclient'
 require 'xmlsimple'
 
-class ShortenedUrl
+class Shortenedurl
   include DataMapper::Resource
 
   property :id, Serial
@@ -9,7 +9,7 @@ class ShortenedUrl
   property :myurl, String
   property :username, Text
   
-  has n, :visit
+  has n, :visits
 end
 
 class Visit
@@ -18,11 +18,11 @@ class Visit
   property  :id,          Serial
   property  :created_at,  DateTime
   property  :ip,          IPAddress
-  property  :country,     String
+ # property  :country,     String
   
-  belongs_to  :ShortenedUrl
+  belongs_to  :shortenedurl
 
-  after :create, :set_country
+  #after :create, :set_country
 
   def set_country
     xml = RestClient.get "http://ip-api.com/xml/#{self.ip}"  

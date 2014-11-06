@@ -38,10 +38,10 @@ Base = 36
 get '/' do
   puts "inside get '/': #{params}"
   if (session[:email].to_s == '')
-    @list = ShortenedUrl.all(:order => [ :id.asc ], :limit => 20, :username => "")
+    @list = Shortenedurl.all(:order => [ :id.asc ], :limit => 20, :username => "")
     # in SQL => SELECT * FROM "ShortenedUrl" WHERE username = '' ORDER BY "id" ASC
   else
-    @list = ShortenedUrl.all(:username => session[:email], :order => [ :id.asc ], :limit => 20)
+    @list = Shortenedurl.all(:username => session[:email], :order => [ :id.asc ], :limit => 20)
     # in SQL => SELECT * FROM "ShortenedUrl" WHERE username = 'session[:email]' ORDER BY "id" ASC
   end
   haml :index
@@ -53,7 +53,7 @@ post '/' do
   uriShort = URI::parse(params[:myurlshort].to_s.strip.sub(' ', '_'))
   if uri.is_a? URI::HTTP or uri.is_a? URI::HTTPS then
     begin
-      @short_url = ShortenedUrl.first_or_create(:url => params[:url], :myurl => params[:myurlshort], :username => session[:email].to_s)
+      @short_url = Shortenedurl.first_or_create(:url => params[:url], :myurl => params[:myurlshort], :username => session[:email].to_s)
     rescue Exception => e
       puts "EXCEPTION!!!!!!!!!!!!!!!!!!!"
       pp @short_url
@@ -65,17 +65,31 @@ post '/' do
   redirect '/'
 end
 
+def get_remote_ip(env)
+  puts "request.url = #{request.url}"
+  puts "request.ip = #{request.ip}"
+  if addr = env['HTTP_X_FORWARDED_FOR']
+    puts "env['HTTP_X_FORWARDED_FOR'] = #{addr}"
+    addr.split(',').first.strip
+  else
+    puts "env['REMOTE_ADDR'] = #{env['REMOTE_ADDR']}"
+    env['REMOTE_ADDR']
+  end
+end
+
 get '/:shortened' do
   puts "inside get '/:shortened': #{params}"
-
-  if (params[:shortened] == '' || params[:shortened].nil?)
-    short_url = ShortenedUrl.first(:id => params[:shortened].to_i(Base))
-  else
-    short_url = ShortenedUrl.first(:myurl => params[:shortened])
+  puts "Los parametros son: #{params[:shortened]}"
+  #if (params[:shortened] == '' || params[:shortened].nil?)
+    short_url = Shortenedurl.first(:id => params[:shortened].to_i(Base))
+  #else
+  if (short_url.nil?)
+    short_url = Shortenedurl.first(:myurl => params[:shortened])
   end
+  #end
 
-  short_url.visit << Visit.create(:ip => set_ip, :shortened_url_id => short_url.id)
-  short_url.save
+  visitas = Visit.new(:ip => get_remote_ip(env), :shortenedurl_id => short_url.id)
+  visitas.save
 
   # HTTP status codes that start with 3 (such as 301, 302) tell the
   # browser to go look for that resource in another location. This is
